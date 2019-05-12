@@ -2,7 +2,7 @@
   <div class="fillcontain">
     <div class="table_container">
       <div class="mar10 pad10">
-        <h3>场景列表</h3>
+        <h3>应用列表</h3>
       </div>
       <div class="mar10">
         <scene-list
@@ -48,11 +48,13 @@ export default {
     'scene-list': () => import('@/components/sceneList.vue')
   },
   created() {
+    this.platformId = this.$route.query.platformId
+    console.log('@platformId: ', this.platformId)
     this.initData(this.pageInfo)
   },
   methods: {
     async initData(params) {
-      let res = await getSceneList(params)
+      let res = await getSceneList({ page: this.pageInfo.page, pageSize: this.pageInfo.pageSize, pid: this.platformId })
       if ((res.status === 200)) {
         this.sceneList = res.data.list
         this.pageInfo.total = res.data.total

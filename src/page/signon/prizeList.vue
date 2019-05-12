@@ -99,7 +99,7 @@ export default {
       if (res.status === 200) {
         this.signon = res.data
         this.cycleNum = this.signon.cycle_text.number ? this.signon.cycle_text.number : DATETYPEVALUE[this.signon.cycle_text.type]
-        for (let m = 1; m <= this.cycleNum; m++) {
+        for (let m = 1;m <= this.cycleNum;m++) {
           if (this.signon.prizes_text && this.signon.prizes_text.prizes && this.signon.prizes_text.prizes[0] && this.signon.prizes_text.prizes[0][m]) {
             prizes.push({ index: m, prizeIds: this.signon.prizes_text.prizes[0][m] })
           } else {
@@ -156,7 +156,7 @@ export default {
       // }
     },
     async getPrizesBySignon() {
-      let res = await getPrizeList({ id: this.signon.id, number: this.prize.index, type: this.type, page: this.pageInfo.page, pageSize: this.pageInfo.pageSize })
+      let res = await getPrizeList({ id: this.signon.id, number: this.prize.index, type: this.type, page: this.pageInfo.page, pageSize: this.pageInfo.pageSize, pid: 1 })
       if (res.status === 200) {
         if (!res.data.list || res.data.list.length < 1) {
           return false

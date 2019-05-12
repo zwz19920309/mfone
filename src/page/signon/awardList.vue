@@ -5,7 +5,13 @@
         <h3>奖品管理</h3>
       </div>
       <div class="mar10">
-        <prize-list :isEdit="isEdit" :callBack="initData" :prizeList="prizeList" ref="prizeListRef"></prize-list>
+        <prize-list
+          :pid="platformId"
+          :isEdit="isEdit"
+          :callBack="initData"
+          :prizeList="prizeList"
+          ref="prizeListRef"
+        ></prize-list>
       </div>
       <div class="Pagination" style="text-align: left;margin-top: 10px;">
         <el-pagination
@@ -29,6 +35,7 @@ export default {
     return {
       isEdit: true,
       prizeList: [],
+      platformId: '',
       pageInfo: {
         page: 1,
         pageSize: 10,
@@ -40,11 +47,13 @@ export default {
     'prize-list': () => import('@/components/prizeList.vue')
   },
   created() {
+    this.platformId = this.$route.query.platformId
+    console.log('@123123123123platformId: ', this.platformId)
     this.initData(this.pageInfo)
   },
   methods: {
     async initData(params) {
-      let res = await getPrizeList({ page: this.pageInfo.page, pageSize: this.pageInfo.pageSize })
+      let res = await getPrizeList({ page: this.pageInfo.page, pageSize: this.pageInfo.pageSize, pid: this.platformId })
       if (res.status === 200) {
         this.prizeList = res.data.list
         this.pageInfo.total = res.data.total

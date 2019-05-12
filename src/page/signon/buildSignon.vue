@@ -218,6 +218,7 @@ export default {
       this.params.isResign = this.resign.isResign
       this.params.formId = this.resign.formId
       this.params.cost = this.resign.cost
+      this.params.pid = 1
       if (this.resign.cost === 2) {
         this.params.resignDates = this.resignDateList
       }

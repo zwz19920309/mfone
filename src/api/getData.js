@@ -164,3 +164,8 @@ export const getSelfSignon = data => fetch('/client/signon/getSelfSignon', data,
  * 重新签到
  */
 export const reSignon = data => fetch('/client/signon/reSignon', data, 'POST')
+
+/** 
+*获取平台列表
+*/
+export const getPlatFormList = data => fetch('/admin/platform/getPlatFormList', data, 'POST')

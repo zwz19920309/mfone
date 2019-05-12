@@ -30,6 +30,7 @@ export default {
       isEdit: true,
       signonList: [],
       pageInfo: {
+        pid: 1,
         currentPage: 1,
         pageSize: 10,
         total: 0
@@ -41,13 +42,16 @@ export default {
     'edit-signon-dialog': () => import('@/components/editSignonDialog.vue')
   },
   created() {
+    this.platformId = this.$route.query.platformId
+    console.log('@platformId: ', this.platformId)
     this.initData(this.pageInfo)
   },
   methods: {
     async initData(params) {
       let res = await getSignonList({
         page: params.currentPage,
-        pageSize: params.pageSize
+        pageSize: params.pageSize,
+        pid: this.platformId
       })
       if (res.status === 200) {
         this.signonList = res.data.list
